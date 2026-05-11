@@ -137,7 +137,7 @@
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
         }
 
-        /* --- THREE PILLAR HUD --- */
+        /* --- HUD PILLARS --- */
         .hud-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -179,8 +179,8 @@
         <div class="command-content">
             <div class="brand-logo">SNG COMMAND</div>
             <div class="global-stats">
-                <div class="stat-pillar"><label>Total Units</label><span>22,933</span></div>
-                <div class="stat-pillar"><label>Total Cust</label><span style="color: var(--neon-blue);">2,984</span></div>
+                <div class="stat-pillar"><label>Aggregated Units</label><span>23,031</span></div>
+                <div class="stat-pillar"><label>Global Cust</label><span style="color: var(--neon-blue);">3,015</span></div>
             </div>
         </div>
     </nav>
@@ -189,14 +189,14 @@
 
     <script>
         const reps = [
-            { name: "Mary", rev: 72050254, units: 8255, cust: 1024, status: "ELITE", best: "FEB: ₦20.5M", worst: "MAY: ₦3.9M" },
-            { name: "Bolu", rev: 43972823, units: 4236, cust: 523, status: "PRO", best: "FEB: ₦11.1M", worst: "MAY: ₦3.0M" },
-            { name: "Jaya", rev: 18372590, units: 1781, cust: 277, status: "STEADY", best: "JAN: ₦5.3M", worst: "MAY: ₦1.0M" },
-            { name: "Susan", rev: 17464892, units: 2028, cust: 282, status: "RISING", best: "JAN: ₦4.9M", worst: "MAY: ₦1.1M" },
-            { name: "Lewa", rev: 15182200, units: 1932, cust: 217, status: "ACTIVE", best: "APR: ₦3.8M", worst: "MAY: ₦774k" },
-            { name: "Rachel", rev: 15091111, units: 1648, cust: 266, status: "ACTIVE", best: "MAR: ₦4.3M", worst: "MAY: ₦1.6M" },
-            { name: "Divine", rev: 13490200, units: 1847, cust: 268, status: "ACTIVE", best: "JAN: ₦3.4M", worst: "MAY: ₦958k" },
-            { name: "Direct Log", rev: 4895800, units: 606, cust: 87, status: "LOGISTICS", best: "JAN: ₦1.8M", worst: "MAY: ₦241k" },
+            { name: "Mary", rev: 72679454, units: 8335, cust: 1031, status: "ELITE", best: "FEB: ₦20.5M", worst: "MAY: ₦4.6M" },
+            { name: "Bolu", rev: 44107223, units: 4260, cust: 526, status: "PRO", best: "FEB: ₦11.1M", worst: "MAY: ₦3.1M" },
+            { name: "Jaya", rev: 18778590, units: 1788, cust: 278, status: "STEADY", best: "JAN: ₦5.3M", worst: "MAY: ₦1.4M" },
+            { name: "Susan", rev: 17532092, units: 2040, cust: 283, status: "RISING", best: "JAN: ₦4.9M", worst: "MAY: ₦1.2M" },
+            { name: "Rachel", rev: 15773461, units: 1714, cust: 273, status: "ACTIVE", best: "MAR: ₦4.3M", worst: "MAY: ₦2.3M" },
+            { name: "Lewa", rev: 15215800, units: 1945, cust: 218, status: "ACTIVE", best: "APR: ₦3.8M", worst: "MAY: ₦808k" },
+            { name: "Divine", rev: 13593800, units: 1872, cust: 270, status: "ACTIVE", best: "JAN: ₦3.4M", worst: "MAY: ₦1.0M" },
+            { name: "Direct Log", rev: 5030200, units: 630, cust: 88, status: "CORE", best: "JAN: ₦1.8M", worst: "MAY: ₦375k" },
             { name: "Chiwendu", rev: 0, units: 0, cust: 0, status: "NEW", best: "N/A", worst: "N/A" }
         ];
 
@@ -214,13 +214,13 @@
                         <span class="status-tag">${rep.status}</span>
                     </div>
                     <div class="revenue-display">
-                        <label style="font-size: 9px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; display: block;">Total Revenue (Jan-May)</label>
+                        <label style="font-size: 9px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; display: block;">Total Revenue (MTD)</label>
                         <div class="timer-val" id="timer-${rep.name.replace(/\s+/g, '')}">₦0</div>
                     </div>
                     <div class="hud-row">
                         <div class="hud-item"><label>Units</label><b>${rep.units.toLocaleString()}</b></div>
                         <div class="hud-item"><label>Customers</label><b>${rep.cust.toLocaleString()}</b></div>
-                        <div class="hud-item"><label>Avg/Cust</label><b>₦${rep.cust > 0 ? Math.floor(rep.rev/rep.cust).toLocaleString() : 0}</b></div>
+                        <div class="hud-item"><label>LTV Avg</label><b>₦${rep.cust > 0 ? Math.floor(rep.rev/rep.cust).toLocaleString() : 0}</b></div>
                     </div>
                     <div class="card-ticker">
                         <span><b class="best-label">PEAK:</b> ${rep.best}</span>
@@ -244,7 +244,7 @@
                     requestAnimationFrame(update);
                 } else {
                     el.innerText = "₦" + target.toLocaleString();
-                    setTimeout(() => { current = 0; update(); }, 5000);
+                    setTimeout(() => { current = 0; update(); }, 3000);
                 }
             };
             update();
