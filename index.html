@@ -2,248 +2,247 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNG ELITE LEADERBOARD V17</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesque:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SNG COMMAND CENTER | 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030508;
-            --card: #0a0f1a;
-            --accent: #00f2ff;
-            --success: #00ffa3;
-            --danger: #ff3366;
-            --gold: #f59e0b;
+            --bg: #020408;
+            --glass: rgba(15, 23, 42, 0.7);
+            --neon-blue: #00f2ff;
+            --neon-green: #00ffa3;
+            --neon-red: #ff3366;
         }
 
         body {
             background: var(--bg);
-            color: #f1f5f9;
-            font-family: 'Inter', sans-serif;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 163, 0.05) 0%, transparent 40%);
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            padding-top: 160px; /* Offset for fixed header */
+            padding-top: 140px; /* Adjusted for mobile header height */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- FIXED HUB HEADER --- */
-        .fixed-hub {
+        /* --- MOBILE OPTIMIZED HEADER --- */
+        .command-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(3, 5, 8, 0.98);
-            backdrop-filter: blur(20px);
             z-index: 10000;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 10px;
+            background: rgba(2, 4, 8, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.3);
+            padding: env(safe-area-inset-top) 0 15px 0;
         }
 
-        .header-main {
+        .command-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+        }
+
+        @media (min-width: 768px) {
+            .command-content { flex-direction: row; justify-content: space-between; }
+        }
+
+        .brand-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .global-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-pillar { text-align: center; }
+        .stat-pillar label { display: block; font-size: 8px; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1px; }
+        .stat-pillar span { font-family: 'Orbitron'; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE GRID --- */
+        .grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr; /* Default 1 col for mobile */
+            gap: 20px;
+            padding: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-container { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 20px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+        }
+
+        .rep-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
+            margin-bottom: 20px;
         }
 
-        .header-main h1 {
-            font-family: 'Space Grotesque';
-            font-size: 1.5rem;
-            color: var(--accent);
+        .rep-info h2 {
+            font-family: 'Orbitron';
+            font-size: 1.4rem;
             margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 4px;
         }
 
-        .system-kpis {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 0 40px 10px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .status-tag {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px;
+            background: rgba(0, 255, 163, 0.1);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
         }
 
-        .kpi-item {
-            text-align: center;
-            border-left: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .kpi-item label { display: block; font-size: 9px; color: #94a3b8; text-transform: uppercase; }
-        .kpi-item span { font-family: 'Space Grotesque'; font-weight: 700; color: #fff; font-size: 1.1rem; }
-
-        /* --- LEADERBOARD GRID --- */
-        .leaderboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
-        }
-
-        .rep-card {
-            background: var(--card);
-            border-radius: 24px;
-            padding: 25px;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .rep-card:hover {
-            border-color: var(--accent);
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
-        }
-
-        .rank-badge {
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: var(--accent);
-            color: #000;
-            font-family: 'Space Grotesque';
-            font-weight: 900;
-            padding: 5px 15px;
-            border-radius: 8px;
-            font-size: 12px;
-        }
-
-        .rep-name {
-            font-family: 'Space Grotesque';
-            font-size: 1.6rem;
-            margin: 10px 0 5px;
-            color: #fff;
-        }
-
-        /* --- TIMER ELEMENT --- */
-        .revenue-timer-box {
-            background: rgba(0, 242, 255, 0.03);
-            border: 1px solid rgba(0, 242, 255, 0.1);
+        .revenue-display {
+            background: rgba(0,0,0,0.4);
             border-radius: 16px;
             padding: 20px;
-            margin: 15px 0;
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        .timer-label { font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
-        
-        .timer-value {
-            font-family: 'Space Grotesque';
-            font-size: 2rem;
+        .timer-val {
+            font-family: 'Orbitron';
+            font-size: 1.8rem;
             font-weight: 700;
             color: #fff;
-            display: block;
         }
 
-        .stat-grid {
+        .hud-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
         }
 
-        .mini-stat {
-            background: rgba(255,255,255,0.02);
+        .hud-item {
+            background: rgba(255,255,255,0.03);
             padding: 12px;
             border-radius: 12px;
         }
 
-        .mini-stat label { font-size: 9px; color: #64748b; display: block; text-transform: uppercase; }
-        .mini-stat span { font-weight: 700; font-size: 14px; }
+        .hud-item label { font-size: 9px; color: #64748b; text-transform: uppercase; display: block; }
+        .hud-item b { font-size: 0.9rem; color: #f8fafc; }
 
-        .highlights {
+        .card-ticker {
             margin-top: 20px;
-            font-size: 11px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 9px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column; /* Stack on very small screens */
+            gap: 5px;
+            color: #94a3b8;
         }
 
-        .high-pill { padding: 4px 10px; border-radius: 4px; }
-        .high-pill.best { background: rgba(0, 255, 163, 0.1); color: var(--success); }
-        .high-pill.worst { background: rgba(255, 51, 102, 0.1); color: var(--danger); }
+        @media (min-width: 400px) {
+            .card-ticker { flex-direction: row; justify-content: space-between; }
+        }
+
+        .best-label { color: var(--neon-green); }
+        .worst-label { color: var(--neon-red); }
     </style>
 </head>
 <body>
 
-    <div class="fixed-hub">
-        <div class="header-main">
-            <h1>SNG ELITE HUB 2026</h1>
-            <div style="font-size: 12px; font-weight: 700; color: var(--success)">MAY STATUS: LIVE DATA</div>
+    <nav class="command-bar">
+        <div class="command-content">
+            <div class="brand-logo">SNG COMMAND</div>
+            <div class="global-stats">
+                <div class="stat-pillar"><label>Units</label><span>22,333</span></div>
+                <div class="stat-pillar"><label>Group Rev</label><span style="color: var(--neon-green);">₦200.5M</span></div>
+            </div>
         </div>
-        <div class="system-kpis">
-            <div class="kpi-item"><label>Total Rev MTD</label><span>₦12,951,900</span></div>
-            <div class="kpi-item"><label>Total Units</label><span>1,404</span></div>
-            <div class="kpi-item"><label>Active Reps</label><span>8</span></div>
-            <div class="kpi-item"><label>Market Share</label><span>Lagos 49%</span></div>
-        </div>
-    </div>
+    </nav>
 
-    <div class="leaderboard-container" id="leaderboard">
-        <!-- Cards generated by JS for better logic handling -->
-    </div>
+    <div class="grid-container" id="leaderboard"></div>
 
-<script>
-    const salesData = [
-        { name: "Mary", totalRev: 72050254, units: 8255, cust: 1024, bestMonth: "Feb (₦20.4M)", worstMonth: "May (₦3.9M)" },
-        { name: "Bolu", totalRev: 43972823, units: 4236, cust: 523, bestMonth: "Feb (₦11.1M)", worstMonth: "May (₦3.0M)" },
-        { name: "Jaya", totalRev: 18372590, units: 1781, cust: 277, bestMonth: "Jan (₦5.3M)", worstMonth: "May (₦1.0M)" },
-        { name: "Susan", totalRev: 17464892, units: 2028, cust: 282, bestMonth: "Jan (₦4.9M)", worstMonth: "May (₦1.1M)" },
-        { name: "Lewa", totalRev: 15182200, units: 1932, cust: 217, bestMonth: "Apr (₦3.8M)", worstMonth: "May (₦774k)" },
-        { name: "Rachel", totalRev: 15091111, units: 1648, cust: 266, bestMonth: "Mar (₦4.3M)", worstMonth: "May (₦1.6M)" },
-        { name: "Divine", totalRev: 13490200, units: 1847, cust: 268, bestMonth: "Jan (₦3.4M)", worstMonth: "May (₦958k)" },
-        { name: "Chiwendu", totalRev: 0, units: 0, cust: 0, bestMonth: "N/A", worstMonth: "N/A" },
-        { name: "Direct Log", totalRev: 4895800, units: 606, cust: 87, bestMonth: "Jan (₦1.8M)", worstMonth: "May (₦241k)" }
-    ];
+    <script>
+        const reps = [
+            { name: "Mary", rev: 72050254, units: 8255, status: "ELITE", best: "FEB: ₦20.5M", worst: "MAY: ₦3.9M" },
+            { name: "Bolu", rev: 43972823, units: 4236, status: "PRO", best: "FEB: ₦11.1M", worst: "MAY: ₦3.0M" },
+            { name: "Jaya", rev: 18372590, units: 1781, status: "STEADY", best: "JAN: ₦5.3M", worst: "MAY: ₦1.0M" },
+            { name: "Susan", rev: 17464892, units: 2028, status: "RISING", best: "JAN: ₦4.9M", worst: "MAY: ₦1.1M" },
+            { name: "Lewa", rev: 15182200, units: 1932, status: "ACTIVE", best: "APR: ₦3.8M", worst: "MAY: ₦774k" },
+            { name: "Rachel", rev: 15091111, units: 1648, status: "ACTIVE", best: "MAR: ₦4.3M", worst: "MAY: ₦1.6M" },
+            { name: "Divine", rev: 13490200, units: 1847, status: "ACTIVE", best: "JAN: ₦3.4M", worst: "MAY: ₦958k" },
+            { name: "Chiwendu", rev: 0, units: 0, status: "NEW", best: "N/A", worst: "N/A" }
+        ];
 
-    function createCards() {
-        const container = document.getElementById('leaderboard');
-        salesData.sort((a, b) => b.totalRev - a.totalRev).forEach((rep, index) => {
-            const card = document.createElement('div');
-            card.className = 'rep-card';
-            card.innerHTML = `
-                <div class="rank-badge">#${index + 1}</div>
-                <div class="rep-name">${rep.name}</div>
-                <div class="revenue-timer-box">
-                    <span class="timer-label">Total 2026 Revenue</span>
-                    <span class="timer-value" id="rev-${rep.name}">₦0</span>
-                </div>
-                <div class="stat-grid">
-                    <div class="mini-stat"><label>Customers</label><span>${rep.cust.toLocaleString()}</span></div>
-                    <div class="mini-stat"><label>Units Sold</label><span>${rep.units.toLocaleString()}</span></div>
-                </div>
-                <div class="highlights">
-                    <div class="high-pill best"><b>BEST:</b> ${rep.bestMonth}</div>
-                    <div class="high-pill worst"><b>LOW:</b> ${rep.worstMonth}</div>
-                </div>
-            `;
-            container.appendChild(card);
-            animateRevenue(rep.name, rep.totalRev);
-        });
-    }
+        function init() {
+            const grid = document.getElementById('leaderboard');
+            reps.sort((a,b) => b.rev - a.rev).forEach((rep, i) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="rep-header">
+                        <div class="rep-info">
+                            <span style="color: var(--neon-blue); font-size: 8px; font-weight: 700;">#0${i+1} RANKING</span>
+                            <h2>${rep.name}</h2>
+                        </div>
+                        <span class="status-tag">${rep.status}</span>
+                    </div>
+                    <div class="revenue-display">
+                        <div class="timer-val" id="timer-${rep.name}">₦0</div>
+                    </div>
+                    <div class="hud-row">
+                        <div class="hud-item"><label>Volume</label><b>${rep.units.toLocaleString()} Units</b></div>
+                        <div class="hud-item"><label>Status</label><b>Operational</b></div>
+                    </div>
+                    <div class="card-ticker">
+                        <span><b class="best-label">PEAK:</b> ${rep.best}</span>
+                        <span><b class="worst-label">LOW:</b> ${rep.worst}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+                animate(rep.name, rep.rev);
+            });
+        }
 
-    function animateRevenue(id, target) {
-        const el = document.getElementById(`rev-${id}`);
-        let current = 0;
-        const step = target / 100;
+        function animate(name, target) {
+            const el = document.getElementById(`timer-${name}`);
+            let current = 0;
+            const step = target / 50; // Faster for mobile responsiveness
 
-        const run = () => {
-            if (current < target) {
-                current += step;
-                el.innerText = "₦" + Math.floor(current).toLocaleString();
-                requestAnimationFrame(run);
-            } else {
-                el.innerText = "₦" + target.toLocaleString();
-                // HOLD FOR 3 SECONDS THEN RESTART
-                setTimeout(() => {
-                    current = 0;
-                    run();
-                }, 3000);
-            }
-        };
-        run();
-    }
-
-    window.onload = createCards;
-</script>
-
+            const update = () => {
+                if (current < target) {
+                    current += step;
+                    el.innerText = "₦" + Math.floor(current).toLocaleString();
+                    requestAnimationFrame(update);
+                } else {
+                    el.innerText = "₦" + target.toLocaleString();
+                    setTimeout(() => { current = 0; update(); }, 4000);
+                }
+            };
+            update();
+        }
+        window.onload = init;
+    </script>
 </body>
 </html>
