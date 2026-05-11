@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNG ELITE LEADERBOARD V2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesque:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05070a;
+            --card: #0f172a;
+            --accent: #00f2ff;
+            --success: #00ffa3;
+            --danger: #ff3366;
+            --gold: #f59e0b;
+        }
+
+        body {
+            background: var(--bg);
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding-top: 140px; /* Space for fixed header */
+        }
+
+        /* --- FIXED HEADER --- */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(5, 7, 10, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .fixed-header h1 {
+            font-family: 'Space Grotesque', sans-serif;
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .global-ticker {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+            font-family: 'Space Grotesque';
+            font-size: 12px;
+            color: var(--success);
+        }
+
+        /* --- GRID --- */
+        .leaderboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .rep-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .rank {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-family: 'Space Grotesque';
+            font-weight: 700;
+            background: var(--accent);
+            color: #000;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .name-area h2 { 
+            margin: 0; 
+            font-family: 'Space Grotesque'; 
+            color: #fff;
+        }
+
+        /* --- REVENUE TIMER --- */
+        .rev-timer-container {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+            border: 1px dashed rgba(0, 242, 255, 0.3);
+        }
+
+        .rev-label {
+            display: block;
+            font-size: 10px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .rev-value {
+            font-family: 'Space Grotesque';
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-top: 10px;
+            color: #94a3b8;
+        }
+
+        .progress-container {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .badge-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.03);
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 10px;
+        }
+        .badge b { color: var(--success); display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="fixed-header">
+        <h1>SNG Elite Leaderboard</h1>
+        <div class="global-ticker">
+            <span>MAY TOTAL: ₦12,951,900</span>
+            <span>TOP REP: MARY</span>
+            <span>SYSTEM STATUS: ACTIVE</span>
+        </div>
+    </div>
+
+    <div class="leaderboard-grid">
+        
+        <!-- REP CARD: MARY -->
+        <div class="rep-card">
+            <div class="rank">RANK #1</div>
+            <div class="name-area">
+                <h2>MARY</h2>
+                <div class="progress-container"><div class="progress-fill" style="width: 14.4%"></div></div>
+            </div>
+            <div class="rev-timer-container">
+                <span class="rev-label">MTD Revenue Achieved</span>
+                <div class="rev-value" data-val="72050254">₦0</div>
+            </div>
+            <div class="stat-row">
+                <span>Customers: <b>1,024</b></span>
+                <span>Units: <b>8,255</b></span>
+            </div>
+            <div class="badge-box">
+                <div class="badge">BEST MONTH<b>₦683k / Day</b></div>
+                <div class="badge">TARGET<b>₦500M</b></div>
+            </div>
+        </div>
+
+        <!-- REP CARD: BOLU -->
+        <div class="rep-card">
+            <div class="rank">RANK #2</div>
+            <div class="name-area">
+                <h2>BOLU</h2>
+                <div class="progress-container"><div class="progress-fill" style="width: 10.9%"></div></div>
+            </div>
+            <div class="rev-timer-container">
+                <span class="rev-label">MTD Revenue Achieved</span>
+                <div class="rev-value" data-val="43972823">₦0</div>
+            </div>
+            <div class="stat-row">
+                <span>Customers: <b>523</b></span>
+                <span>Units: <b>4,236</b></span>
+            </div>
+            <div class="badge-box">
+                <div class="badge">BEST MONTH<b>₦370k / Day</b></div>
+                <div class="badge">TARGET<b>₦400M</b></div>
+            </div>
+        </div>
+
+        <!-- REP CARD: JAYA -->
+        <div class="rep-card">
+            <div class="rank">RANK #3</div>
+            <div class="name-area">
+                <h2>JAYA</h2>
+                <div class="progress-container"><div class="progress-fill" style="width: 12.2%"></div></div>
+            </div>
+            <div class="rev-timer-container">
+                <span class="rev-label">MTD Revenue Achieved</span>
+                <div class="rev-value" data-val="18372590">₦0</div>
+            </div>
+            <div class="stat-row">
+                <span>Customers: <b>277</b></span>
+                <span>Units: <b>1,781</b></span>
+            </div>
+            <div class="badge-box">
+                <div class="badge">BEST MONTH<b>₦177k / Day</b></div>
+                <div class="badge">TARGET<b>₦150M</b></div>
+            </div>
+        </div>
+
+        <!-- REP CARD: SUSAN -->
+        <div class="rep-card">
+            <div class="rank">RANK #4</div>
+            <div class="name-area">
+                <h2>SUSAN</h2>
+                <div class="progress-container"><div class="progress-fill" style="width: 17.4%"></div></div>
+            </div>
+            <div class="rev-timer-container">
+                <span class="rev-label">MTD Revenue Achieved</span>
+                <div class="rev-value" data-val="17464892">₦0</div>
+            </div>
+            <div class="stat-row">
+                <span>Customers: <b>282</b></span>
+                <span>Units: <b>2,028</b></span>
+            </div>
+            <div class="badge-box">
+                <div class="badge">BEST MONTH<b>₦164k / Day</b></div>
+                <div class="badge">TARGET<b>₦100M</b></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function startTimer(el) {
+            const target = parseInt(el.getAttribute('data-val'));
+            let current = 0;
+            const increment = target / 100; // Speed of climb
+
+            const update = () => {
+                if (current < target) {
+                    current += increment;
+                    el.innerText = "₦" + Math.floor(current).toLocaleString();
+                    requestAnimationFrame(update);
+                } else {
+                    el.innerText = "₦" + target.toLocaleString();
+                    // Pause for 3 seconds, then restart
+                    setTimeout(() => {
+                        current = 0;
+                        update();
+                    }, 3000);
+                }
+            };
+            update();
+        }
+
+        // Initialize all timers
+        document.querySelectorAll('.rev-value').forEach(el => {
+            startTimer(el);
+        });
+    </script>
+</body>
+</html>
