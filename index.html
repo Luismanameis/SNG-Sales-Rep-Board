@@ -22,12 +22,12 @@
             color: #e2e8f0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            padding-top: 140px; /* Adjusted for mobile header height */
+            padding-top: 140px; 
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- MOBILE OPTIMIZED HEADER --- */
+        /* --- STICKY NAV COMMAND --- */
         .command-bar {
             position: fixed;
             top: 0;
@@ -44,7 +44,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            flex-direction: column; /* Stack on mobile */
+            flex-direction: column;
             align-items: center;
             gap: 10px;
             padding: 10px 20px;
@@ -78,7 +78,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr; /* Default 1 col for mobile */
+            grid-template-columns: 1fr;
             gap: 20px;
             padding: 15px;
         }
@@ -94,7 +94,7 @@
             padding: 20px;
             position: relative;
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .rep-header {
@@ -126,6 +126,7 @@
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
+            border: 1px solid rgba(0, 242, 255, 0.1);
         }
 
         .timer-val {
@@ -133,22 +134,25 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: #fff;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
         }
 
+        /* --- THREE PILLAR HUD --- */
         .hud-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
         }
 
         .hud-item {
             background: rgba(255,255,255,0.03);
-            padding: 12px;
+            padding: 12px 5px;
             border-radius: 12px;
+            text-align: center;
         }
 
-        .hud-item label { font-size: 9px; color: #64748b; text-transform: uppercase; display: block; }
-        .hud-item b { font-size: 0.9rem; color: #f8fafc; }
+        .hud-item label { font-size: 8px; color: #64748b; text-transform: uppercase; display: block; margin-bottom: 4px; }
+        .hud-item b { font-size: 0.85rem; color: #f8fafc; font-family: 'Orbitron'; }
 
         .card-ticker {
             margin-top: 20px;
@@ -156,7 +160,7 @@
             border-top: 1px solid rgba(255,255,255,0.05);
             font-size: 9px;
             display: flex;
-            flex-direction: column; /* Stack on very small screens */
+            flex-direction: column;
             gap: 5px;
             color: #94a3b8;
         }
@@ -175,8 +179,8 @@
         <div class="command-content">
             <div class="brand-logo">SNG COMMAND</div>
             <div class="global-stats">
-                <div class="stat-pillar"><label>Units</label><span>22,333</span></div>
-                <div class="stat-pillar"><label>Group Rev</label><span style="color: var(--neon-green);">₦200.5M</span></div>
+                <div class="stat-pillar"><label>Total Units</label><span>22,933</span></div>
+                <div class="stat-pillar"><label>Total Cust</label><span style="color: var(--neon-blue);">2,984</span></div>
             </div>
         </div>
     </nav>
@@ -185,14 +189,15 @@
 
     <script>
         const reps = [
-            { name: "Mary", rev: 72050254, units: 8255, status: "ELITE", best: "FEB: ₦20.5M", worst: "MAY: ₦3.9M" },
-            { name: "Bolu", rev: 43972823, units: 4236, status: "PRO", best: "FEB: ₦11.1M", worst: "MAY: ₦3.0M" },
-            { name: "Jaya", rev: 18372590, units: 1781, status: "STEADY", best: "JAN: ₦5.3M", worst: "MAY: ₦1.0M" },
-            { name: "Susan", rev: 17464892, units: 2028, status: "RISING", best: "JAN: ₦4.9M", worst: "MAY: ₦1.1M" },
-            { name: "Lewa", rev: 15182200, units: 1932, status: "ACTIVE", best: "APR: ₦3.8M", worst: "MAY: ₦774k" },
-            { name: "Rachel", rev: 15091111, units: 1648, status: "ACTIVE", best: "MAR: ₦4.3M", worst: "MAY: ₦1.6M" },
-            { name: "Divine", rev: 13490200, units: 1847, status: "ACTIVE", best: "JAN: ₦3.4M", worst: "MAY: ₦958k" },
-            { name: "Chiwendu", rev: 0, units: 0, status: "NEW", best: "N/A", worst: "N/A" }
+            { name: "Mary", rev: 72050254, units: 8255, cust: 1024, status: "ELITE", best: "FEB: ₦20.5M", worst: "MAY: ₦3.9M" },
+            { name: "Bolu", rev: 43972823, units: 4236, cust: 523, status: "PRO", best: "FEB: ₦11.1M", worst: "MAY: ₦3.0M" },
+            { name: "Jaya", rev: 18372590, units: 1781, cust: 277, status: "STEADY", best: "JAN: ₦5.3M", worst: "MAY: ₦1.0M" },
+            { name: "Susan", rev: 17464892, units: 2028, cust: 282, status: "RISING", best: "JAN: ₦4.9M", worst: "MAY: ₦1.1M" },
+            { name: "Lewa", rev: 15182200, units: 1932, cust: 217, status: "ACTIVE", best: "APR: ₦3.8M", worst: "MAY: ₦774k" },
+            { name: "Rachel", rev: 15091111, units: 1648, cust: 266, status: "ACTIVE", best: "MAR: ₦4.3M", worst: "MAY: ₦1.6M" },
+            { name: "Divine", rev: 13490200, units: 1847, cust: 268, status: "ACTIVE", best: "JAN: ₦3.4M", worst: "MAY: ₦958k" },
+            { name: "Direct Log", rev: 4895800, units: 606, cust: 87, status: "LOGISTICS", best: "JAN: ₦1.8M", worst: "MAY: ₦241k" },
+            { name: "Chiwendu", rev: 0, units: 0, cust: 0, status: "NEW", best: "N/A", worst: "N/A" }
         ];
 
         function init() {
@@ -209,11 +214,13 @@
                         <span class="status-tag">${rep.status}</span>
                     </div>
                     <div class="revenue-display">
-                        <div class="timer-val" id="timer-${rep.name}">₦0</div>
+                        <label style="font-size: 9px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; display: block;">Total Revenue (Jan-May)</label>
+                        <div class="timer-val" id="timer-${rep.name.replace(/\s+/g, '')}">₦0</div>
                     </div>
                     <div class="hud-row">
-                        <div class="hud-item"><label>Volume</label><b>${rep.units.toLocaleString()} Units</b></div>
-                        <div class="hud-item"><label>Status</label><b>Operational</b></div>
+                        <div class="hud-item"><label>Units</label><b>${rep.units.toLocaleString()}</b></div>
+                        <div class="hud-item"><label>Customers</label><b>${rep.cust.toLocaleString()}</b></div>
+                        <div class="hud-item"><label>Avg/Cust</label><b>₦${rep.cust > 0 ? Math.floor(rep.rev/rep.cust).toLocaleString() : 0}</b></div>
                     </div>
                     <div class="card-ticker">
                         <span><b class="best-label">PEAK:</b> ${rep.best}</span>
@@ -221,14 +228,14 @@
                     </div>
                 `;
                 grid.appendChild(card);
-                animate(rep.name, rep.rev);
+                animate(rep.name.replace(/\s+/g, ''), rep.rev);
             });
         }
 
         function animate(name, target) {
             const el = document.getElementById(`timer-${name}`);
             let current = 0;
-            const step = target / 50; // Faster for mobile responsiveness
+            const step = target / 60; 
 
             const update = () => {
                 if (current < target) {
@@ -237,7 +244,7 @@
                     requestAnimationFrame(update);
                 } else {
                     el.innerText = "₦" + target.toLocaleString();
-                    setTimeout(() => { current = 0; update(); }, 4000);
+                    setTimeout(() => { current = 0; update(); }, 5000);
                 }
             };
             update();
