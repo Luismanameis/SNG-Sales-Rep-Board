@@ -179,8 +179,8 @@
         <div class="command-content">
             <div class="brand-logo">SNG COMMAND</div>
             <div class="global-stats">
-                <div class="stat-pillar"><label>Aggregated Units</label><span>23,031</span></div>
-                <div class="stat-pillar"><label>Global Cust</label><span style="color: var(--neon-blue);">3,015</span></div>
+                <div class="stat-pillar"><label>Aggregated Units</label><span id="totalUnits">24,617</span></div>
+                <div class="stat-pillar"><label>Global Cust</label><span id="totalCust" style="color: var(--neon-blue);">3,230</span></div>
             </div>
         </div>
     </nav>
@@ -189,19 +189,20 @@
 
     <script>
         const reps = [
-            { name: "Mary", rev: 72679454, units: 8335, cust: 1031, status: "ELITE", best: "FEB: ₦20.5M", worst: "MAY: ₦4.6M" },
-            { name: "Bolu", rev: 44107223, units: 4260, cust: 526, status: "PRO", best: "FEB: ₦11.1M", worst: "MAY: ₦3.1M" },
-            { name: "Jaya", rev: 18778590, units: 1788, cust: 278, status: "STEADY", best: "JAN: ₦5.3M", worst: "MAY: ₦1.4M" },
-            { name: "Susan", rev: 17532092, units: 2040, cust: 283, status: "RISING", best: "JAN: ₦4.9M", worst: "MAY: ₦1.2M" },
-            { name: "Rachel", rev: 15773461, units: 1714, cust: 273, status: "ACTIVE", best: "MAR: ₦4.3M", worst: "MAY: ₦2.3M" },
-            { name: "Lewa", rev: 15215800, units: 1945, cust: 218, status: "ACTIVE", best: "APR: ₦3.8M", worst: "MAY: ₦808k" },
-            { name: "Divine", rev: 13593800, units: 1872, cust: 270, status: "ACTIVE", best: "JAN: ₦3.4M", worst: "MAY: ₦1.0M" },
-            { name: "Direct Log", rev: 5030200, units: 630, cust: 88, status: "CORE", best: "JAN: ₦1.8M", worst: "MAY: ₦375k" },
+            { name: "Mary", rev: 72814054, units: 8305, cust: 1034, status: "ELITE", best: "FEB: ₦20.5M", worst: "MAY: ₦4.7M" },
+            { name: "Bolu", rev: 44438023, units: 4309, cust: 531, status: "PRO", best: "FEB: ₦11.1M", worst: "MAY: ₦3.5M" },
+            { name: "Jaya", rev: 19087590, units: 1593, cust: 282, status: "STEADY", best: "JAN: ₦5.3M", worst: "MAY: ₦1.8M" },
+            { name: "Susan", rev: 17684292, units: 2050, cust: 286, status: "RISING", best: "JAN: ₦4.9M", worst: "MAY: ₦1.4M" },
+            { name: "Rachel", rev: 16811061, units: 1865, cust: 314, status: "ACTIVE", best: "MAR: ₦4.3M", worst: "FEB: ₦2.0M" },
+            { name: "Lewa", rev: 15594800, units: 2031, cust: 221, status: "ACTIVE", best: "APR: ₦3.8M", worst: "MAY: ₦1.1M" },
+            { name: "Divine", rev: 13627400, units: 1950, cust: 271, status: "ACTIVE", best: "JAN: ₦3.4M", worst: "MAY: ₦1.0M" },
+            { name: "Direct Log", rev: 5105800, units: 605, cust: 88, status: "CORE", best: "JAN: ₦1.8M", worst: "MAY: ₦375k" },
             { name: "Chiwendu", rev: 0, units: 0, cust: 0, status: "NEW", best: "N/A", worst: "N/A" }
         ];
 
         function init() {
             const grid = document.getElementById('leaderboard');
+            grid.innerHTML = '';
             reps.sort((a,b) => b.rev - a.rev).forEach((rep, i) => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -214,7 +215,7 @@
                         <span class="status-tag">${rep.status}</span>
                     </div>
                     <div class="revenue-display">
-                        <label style="font-size: 9px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; display: block;">Total Revenue (MTD)</label>
+                        <label style="font-size: 9px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; display: block;">Total Revenue (YTD)</label>
                         <div class="timer-val" id="timer-${rep.name.replace(/\s+/g, '')}">₦0</div>
                     </div>
                     <div class="hud-row">
@@ -244,7 +245,7 @@
                     requestAnimationFrame(update);
                 } else {
                     el.innerText = "₦" + target.toLocaleString();
-                    setTimeout(() => { current = 0; update(); }, 3000);
+                    setTimeout(() => { current = 0; update(); }, 15000);
                 }
             };
             update();
